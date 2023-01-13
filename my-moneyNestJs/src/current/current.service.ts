@@ -24,11 +24,17 @@ export class CurrentService {
     return this.CurrentModel.findById(id);
   }
 
-  update(id: string, createCurrentDto: CreateCurrentDto) {
-    this.CurrentModel.findByIdAndRemove(id);
-    const newCurrent = new this.CurrentModel(createCurrentDto);
-    return newCurrent.save();
+  async update(id: string, createCurrentDto: CreateCurrentDto) {
+    await this.CurrentModel.findByIdAndUpdate(id,createCurrentDto);
   }
+
+  async updateAmount(id: string, amount : Object) {
+    const oldCurrent = await this.CurrentModel.findById(id)
+    let newAmount = oldCurrent.amount + amount.amount
+    oldCurrent.amount = newAmount
+    return this.CurrentModel.findByIdAndUpdate(id, oldCurrent)
+  }
+
 
 
   remove(id: string) {

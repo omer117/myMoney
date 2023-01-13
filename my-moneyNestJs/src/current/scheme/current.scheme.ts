@@ -11,6 +11,9 @@ export class Current {
 
     @Prop({required: true})
     user_id: string;
+
+    @Prop({required: true})
+    creation_date: Date;
 }
 
 export const CurrentFactory = SchemaFactory.createForClass(Current);

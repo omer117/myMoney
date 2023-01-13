@@ -28,6 +28,11 @@ export class CurrentController {
     return this.currentService.update(id,CreateCurrentDto);
   }
 
+  @Patch('/updateAmount/:id')
+  updateAmount(@Param('id') id: string, @Body() amount : object){
+    return this.currentService.updateAmount(id,amount);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.currentService.remove(id );
